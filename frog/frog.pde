@@ -1,10 +1,17 @@
 double X = 200;
 double Y = 350;
-;
+/*Car car = new Car();
+Car two = new Car();
+Car three = new Car();
+*/
+
 void setup(){
   size(400,400);
 }
 void draw(){
+ /* car.display();
+  two.display();
+  three.display();*/
   outsideCanvas();
   background(0,50,250);
   fill(0,200,0);
@@ -48,8 +55,3 @@ void keyPressed()
        Y=350;
      }
      
-public class Car {
-  int carX=50;
-  int carY=50;
-  int size=200;
-  int carSpeed=0;

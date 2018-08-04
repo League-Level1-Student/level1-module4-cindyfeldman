@@ -4,6 +4,8 @@
  */
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -11,7 +13,10 @@ import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -19,16 +24,23 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /* 1. Download the JavaZoom jar from here: http://bit.ly/javazoom
  * 2. Right click your project and add it as an External JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
-
+public class Jukebox implements Runnable, ActionListener {
+JFrame frame;
+JPanel panel;
+JButton button;
+JButton second;
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Jukebox());
+		Jukebox box = new Jukebox();
+		box.getGoing();
 	}
 
            public void run() {
 
 		// 3. Find an mp3 on your computer or on the Internet.
 		// 4. Create a Song
+Song song = new Song("song.mp3");
+
 
 		// 5. Play the Song
 
@@ -40,11 +52,40 @@ public class Jukebox implements Runnable {
 		 * that was selected.
 		 */
           }
+           void getGoing() {
+        	   frame = new JFrame();
+        	   frame.setVisible(true);
+        	   panel = new JPanel();
+        		   frame.add(panel);
+        		   button = new JButton("Shape of You");
+        		   second = new JButton("Random sound");
+        		   panel.add(button);
+        		   panel.add(second);
+        		   button.addActionListener(this);
+        		   second.addActionListener(this);
+        		   
+           }
 	/* Use this method to add album covers to your Panel. */
 	private JLabel loadImage(String fileName) {
 		URL imageURL = getClass().getResource(fileName);
 		Icon icon = new ImageIcon(imageURL);
 		return new JLabel(icon);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+	JButton ButtonPressed = new JButton();
+	Song two = new Song("song.mp3");
+	two.play();
+	Song three = new Song("sound.wav");
+	if(ButtonPressed ==button) {
+		two.stop();
+		three.play();
+	}
+	else if(ButtonPressed ==second) {
+		two.play();
+	}
 	}
 
 }
